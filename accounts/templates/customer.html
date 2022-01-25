@@ -6,7 +6,7 @@
 
     <div class="col-md">
         <div class="card card-body">
-            <h5>Customer :</h5>
+            <h5>Customer : {{customer.name}}</h5>
             <hr>
             <a href="" class="btn btn-outline-info btn-sm btn-block">
                 Update Customer
@@ -21,8 +21,8 @@
         <div class="card card-body">
             <h5>Contact Information</h5>
             <hr>
-            <p>Email : </p>
-            <p>Phone : </p>
+            <p>Email : {{customer.email}}</p>
+            <p>Phone : {{customer.phone}}</p>
         </div>
     </div>
     
@@ -30,7 +30,7 @@
         <div class="card card-body">
             <h5>Total orders</h5>
             <hr>
-            <h1></h1>
+            <h1>{{total_orders}}</h1>
         </div>
     </div>
 
@@ -62,6 +62,20 @@
                     <th>Update</th>
                     <th>Remove</th>
                 </tr>
+                {% for order in orders %}
+                <tr>
+                    <td>{{order.product}}</td>
+                    <td>{{order.product.category}}</td>
+                    <td>{{order.date_created}}</td>
+                    <td>{{order.status}}</td>
+                    <td><a class="btn btn-primary btn-em btn-block">
+                        Update
+                    </a></td>
+                    <td><a class="btn btn-danger btn-em btn-block">
+                        Delete
+                    </a></td>
+                </tr>
+                {% endfor %}
             </table>
         </div>
     </div>
