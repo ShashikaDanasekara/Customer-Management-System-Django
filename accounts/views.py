@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render,redirect
+from django.forms import inlineformset_factory
 from .models import *
+from .forms import OrderFrom
 
 # Create your views here.
 def home(request):
@@ -39,3 +40,68 @@ def customer(request,pk):
     }
 
     return render(request , 'customer.html',context)
+
+def create_order(request):
+    form = OrderFrom()
+
+    if request.method == 'POST':
+        #print("Print Post",request.POST)
+        form = OrderFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {"form":form}
+
+    return render(request,'order_form.html',context)
+
+def create_single_order(request,pk):
+    OrderFormSet = inlineformset_factory(Customer,Order,fields=('product','status'),extra=5)
+    customer = Customer.objects.get(id=pk)
+    formset = OrderFormSet(queryset=Order.objects.none(),instance=customer)
+
+    if request.method == 'POST':
+        #print("Print Post",request.POST)
+        formset = OrderFormSet(request.POST,instance=customer)
+        if formset.is_valid():
+            formset.save()
+            return redirect('/')
+
+    context = {"formset":formset}
+
+    return render(request,'order_form.html',context)
+
+def update_order(request,pk):
+    order = Order.objects.get(id=pk)
+    form = OrderFrom(instance=order)
+
+    if request.method == 'POST':
+        #print("Print Post",request.POST)
+        form = OrderFrom(request.POST,instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {"form":form}
+    return render(request,'order_form.html',context)
+
+def delete_order(request,pk):
+    order = Order.objects.get(id=pk)
+
+    if request.method == 'POST':
+        #print("Print Post",request.POST)
+        order.delete()
+        return redirect('/')
+
+    context = {"order":order}
+    return render(request,'delete_order.html',context)
+
+
+
+
+
+
+
+
+
+

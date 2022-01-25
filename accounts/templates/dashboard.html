@@ -34,9 +34,9 @@
     
 
     <div class="col-md-7">
-        <h5>LAST 5 ODERS</h5>
+        <h5>LAST 5 ORDERS</h5>
         <div class="card card-body">
-            <a href="" class="btn btn-primary btn-sm btn-block">
+            <a href="{% url 'create_order' %}" class="btn btn-primary btn-sm btn-block">
                 Create Order
             </a>
             <table class="table table-em">
@@ -53,10 +53,10 @@
                     <td>{{order.product}}</td>
                     <td>{{order.date_created}}</td>
                     <td>{{order.status}}</td>
-                    <td><a class="btn btn-primary btn-em btn-block">
+                    <td><a href="{% url 'update_order' order.id %}" class="btn btn-primary btn-em btn-block">
                         Update
                     </a></td>
-                    <td><a class="btn btn-danger btn-em btn-block">
+                    <td><a href="{% url 'delete_order' order.id %}" class="btn btn-danger btn-em btn-block">
                         Delete
                     </a></td>
                 </tr>

@@ -1,0 +1,75 @@
+{% extends 'main.html'%}
+{% load static %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="text-center card text-white bg-dark">
+            <div class="card-body">
+                <form method="POST" class="form-signin">
+                    <h4 class="h3 mb-3 font-weight-normal">CUSTOMIZE DATA</h4>
+                    {% csrf_token %}
+                    {% if form != null %}
+                        {{form.customer.label}}
+                        {{form.customer}}
+                        <br>
+                        <br>
+                        {{form.product.label}}
+                        {{form.product}}
+                        <br>
+                        <br>
+                        {{form.status.label}}
+                        {{form.status}}
+
+                        <br>
+                        <br>
+                        <input class="btn btn-primary" type="submit" name="submit">
+                    {%endif%}
+
+                    {% if formset != null %}
+                        {{ formset.management_form }}
+                        {% for form in formset %}
+                            {{form}}
+                            <br>
+                            <br> 
+                        {% endfor %}
+                        <br>
+                        <br>
+                        <input class="btn btn-primary" type="submit" name="submit">
+
+                    {%endif%}
+                    
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% for form in formset %}
+    <br>
+    <br>
+    {{form.product.label}}
+    {{form.product}}
+    <br>
+    <br>
+    {{form.status.label}}
+    {{form.status}}
+{% endfor %}
+
+
+<!-- 
+<form method="POST" class="form-signin">
+
+    {% csrf_token %}
+    {{form}}
+
+    <input type="submit" name="submit">
+</form>
+-->

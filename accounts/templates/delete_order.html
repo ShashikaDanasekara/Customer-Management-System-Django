@@ -1,0 +1,42 @@
+{% extends 'main.html'%}
+{% load static %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="text-center card text-white bg-dark">
+            <div class="card-body">
+                <form class="form-signin" method="POST" action="{% url 'delete_order' order.id %}">
+                    {% csrf_token %}
+                    <img class="mb-4" src="{% static './images/logo.png' %}" alt="" width="72" height="72">
+                    <h4 class="h3 mb-3 font-weight-normal">Are you sure you want to delete {{order}} ?</h4>
+                
+                    <a class="btn btn-outline-warning" href="{% url 'home' %}">Cancel</a>
+                    <input class="btn btn-danger" type="submit" name="confirm">
+        
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+<!-- 
+<form method="POST" action="{% url 'delete_order' order.id %}">
+
+    {% csrf_token %}
+
+    <a class="btn btn-outline-warning" href="{% url 'home' %}">Cancel</a>
+    <input class="btn btn-danger" type="submit" name="confirm">
+</form>
+-->
+
