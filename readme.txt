@@ -1,5 +1,5 @@
 ## Customer Management System
-- introduction
+- Using this App you can manage a customer data very easily.
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -41,10 +41,18 @@ List the ready features here:
 
 
 ## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
 
-Proceed to describe how to install / setup one's local environment / get started with the project.
+project requirements/dependencies
+1. django 3.1.7
+2. django-filters
 
+Installing project requirements/dependencies
+- install using " pip install Django " command and check your django version using " python -m django --version "
+- django-filter can be installed from PyPI with tools like " pip install django-filter " Then add 'django_filters' to your INSTALLED_APPS.
+*   INSTALLED_APPS = [
+*       ...
+*       'django_filters',
+*   ]
 
 ## Usage
 How does one go about using it?
