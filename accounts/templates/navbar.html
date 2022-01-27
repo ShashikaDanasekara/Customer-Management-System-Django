@@ -15,5 +15,8 @@
           <a class="nav-link" href="{% url 'products' %}">Products</a>
         </li>
       </ul>
+      
+      <span class="text-light mr-3">Hello, {{request.user |capfirst }}</span>
+      <span><a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a></span>
     </div>
   </nav>
