@@ -7,6 +7,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
+      {% if request.user.is_staff %}
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'home' %}">Dashboard <span class="sr-only">(current)</span></a>
@@ -15,8 +16,16 @@
           <a class="nav-link" href="{% url 'products' %}">Products</a>
         </li>
       </ul>
-      
       <span class="text-light mr-3">Hello, {{request.user |capfirst }}</span>
       <span><a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a></span>
+      {% else %}
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home' %}">Hello, {{request.user |capfirst }}<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <span><a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a></span>
+      {% endif %}
+      
     </div>
   </nav>
