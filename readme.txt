@@ -45,14 +45,25 @@ List the ready features here:
 project requirements/dependencies
 1. django 3.1.7
 2. django-filters
+3. pillow
 
 Installing project requirements/dependencies
-- install using " pip install Django " command and check your django version using " python -m django --version "
-- django-filter can be installed from PyPI with tools like " pip install django-filter " Then add 'django_filters' to your INSTALLED_APPS.
+- django 3.1.7 :
+    install using " pip install Django " command 
+    check your django version using " python -m django --version "
+
+- django-filters :
+    django-filter can be installed from PyPI with tools like " pip install django-filter " 
+    Then add 'django_filters' to your INSTALLED_APPS.
 *   INSTALLED_APPS = [
 *       ...
 *       'django_filters',
 *   ]
+
+- pillow :
+    this python imaging library adds image processing capabilities to your Python interpreter.
+    install using " pip install pillow " command 
+    pillow requires python >=3.7
 
 ## Usage
 How does one go about using it?

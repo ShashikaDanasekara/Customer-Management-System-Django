@@ -4,7 +4,7 @@ from django.forms import inlineformset_factory
 from accounts.decorators import unauthenticated_user,allowed_users,admin_only
 
 from .models import *
-from .forms import OrderFrom,CreateUserForm
+from .forms import OrderFrom, CreateUserForm, CustomerFrom
 from .filters import OrderFilter
 
 from django.contrib.auth import authenticate
@@ -23,9 +23,7 @@ def register(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            group = Group.objects.get(name="customer")
-            user.groups.add(group)
+            user = form.save()  
             return redirect('login')
 
     context = {"form":form}
@@ -73,9 +71,35 @@ def home(request):
 
     return render(request , 'dashboard.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def user_page(request):
-    context = {}
+    orders = request.user.customer.order_set.all()
+    total_orders = orders.count()
+    delivered = orders.filter(status='Delivered').count()
+    pending = orders.filter(status='Pending').count()
+
+    context = {
+        'orders':orders,
+        "total_orders":total_orders,
+        "delivered":delivered,
+        "pending":pending
+        }
     return render(request , 'user.html',context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def account_settings(request):
+    user = request.user.customer
+    form = CustomerFrom(instance=user)
+
+    if request.method == "POST":
+        form = CustomerFrom(request.POST, request.FILES, instance=customer)
+        if form.is_valid():
+            form.save()
+
+    context = {'form':form}
+    return render(request , 'account_settings.html',context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin','superadmin'])

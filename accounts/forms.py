@@ -1,6 +1,7 @@
+from pyexpat import model
 from attr import field
 from django.forms import ModelForm
-from .models import Order
+from .models import Customer, Order
 
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
@@ -16,6 +17,12 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username','email','password1','password2']
+
+class CustomerFrom(ModelForm):
+    class Meta:
+        model = Customer
+        fields = '__all__'
+        exclude = ['user']
 
 
 
