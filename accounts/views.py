@@ -86,12 +86,12 @@ def user_page(request):
         "pending":pending
         }
     return render(request , 'user.html',context)
-
+ 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['customer'])
 def account_settings(request):
-    user = request.user.customer
-    form = CustomerFrom(instance=user)
+    customer = request.user.customer
+    form = CustomerFrom(instance=customer)
 
     if request.method == "POST":
         form = CustomerFrom(request.POST, request.FILES, instance=customer)
