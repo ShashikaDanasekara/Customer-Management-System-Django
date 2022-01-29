@@ -53,7 +53,8 @@ def logout(request):
 @login_required(login_url='login')
 @admin_only
 def home(request):
-    orders = Order.objects.all()
+    orders = Order.objects.all().order_by('-date_created')
+    filered_orders = orders[:5]
     customers = Customer.objects.all()
     total_customers = customers.count()
     total_orders = orders.count()
@@ -61,7 +62,7 @@ def home(request):
     pending = orders.filter(status='Pending').count()
 
     context = {
-        "orders":orders,
+        "orders":filered_orders,
         "customers":customers,
         "total_customers":total_customers,
         "total_orders":total_orders,
@@ -126,6 +127,20 @@ def customer(request,pk):
     }
 
     return render(request , 'customer.html',context)
+
+@login_required(login_url='login')
+@admin_only
+def update_customer(request,pk):
+    customer = Customer.objects.get(id=pk)
+    form = CustomerFrom(instance=customer)
+
+    if request.method == "POST":
+        form = CustomerFrom(request.POST, request.FILES, instance=customer)
+        if form.is_valid():
+            form.save()
+
+    context = {'form':form ,'customer':customer}
+    return render(request , 'update_customer.html',context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin','superadmin'])
