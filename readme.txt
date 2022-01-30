@@ -46,6 +46,7 @@ project requirements/dependencies
 1. django 3.1.7
 2. django-filters
 3. pillow
+4. python-decouple 3.5
 
 Installing project requirements/dependencies
 - django 3.1.7 :
@@ -64,6 +65,11 @@ Installing project requirements/dependencies
     this python imaging library adds image processing capabilities to your Python interpreter.
     install using " pip install pillow " command 
     pillow requires python >=3.7
+
+- python-decouple :
+    Decouple helps you to organize your settings 
+    so that you can change parameters/passwords without having to redeploy your app.
+    install using " pip install python-decouple " command 
 
 ## Usage
 How does one go about using it?

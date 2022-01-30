@@ -1,0 +1,40 @@
+{% extends 'main.html'%}
+{% load static %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="text-center card text-white bg-dark">
+            <div class="card-body">
+                <form method="POST" class="form-signin">
+                    <h4 class="h3 mb-3 font-weight-normal">CUSTOMIZE DATA</h4>
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input class="btn btn-primary" type="submit" name="submit">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col">
+
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col">
+
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col">
+
+    </div>
+</div>
+
+{% endblock %}

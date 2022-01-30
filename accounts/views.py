@@ -4,7 +4,7 @@ from django.forms import inlineformset_factory
 from accounts.decorators import unauthenticated_user,allowed_users,admin_only
 
 from .models import *
-from .forms import OrderFrom, CreateUserForm, CustomerFrom
+from .forms import OrderFrom, CreateUserForm, CustomerFrom ,ProductFrom
 from .filters import OrderFilter
 
 from django.contrib.auth import authenticate
@@ -108,6 +108,22 @@ def products(request):
     products = Product.objects.all()
     context = {"products":products}
     return render(request , 'products.html',context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','superadmin'])
+def create_products(request):
+    form = ProductFrom()
+
+    if request.method == 'POST':
+        #print("Print Post",request.POST)
+        form = ProductFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {"form":form}
+
+    return render(request,'product_form.html',context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin','superadmin'])
