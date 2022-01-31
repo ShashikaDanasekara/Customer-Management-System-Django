@@ -6,10 +6,12 @@
     <div class="col-md">
         <div class="card card-body">
             <h4>Products</h4>
+            {% if request.user.is_staff %}
             <span>
             <a href="{% url 'create_products' %}" class="btn btn-outline-success btn-sm">
                 New Product
             </a></span>
+            {% endif %}
         </div>
         <div class="card card-body">
             <table class="table">

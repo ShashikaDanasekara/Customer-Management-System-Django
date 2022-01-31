@@ -103,7 +103,7 @@ def account_settings(request):
     return render(request , 'account_settings.html',context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin','superadmin'])
+@allowed_users(allowed_roles=['customer','admin','superadmin'])
 def products(request):
     products = Product.objects.all()
     context = {"products":products}
