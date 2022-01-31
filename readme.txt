@@ -1,5 +1,5 @@
 ## Customer Management System
-- Using this App you can manage a customer data very easily.
+- Using this App you can manage a customer data very easily. System access is divided into 3 permissions groups namely root, admin and customer. Customers are not allowed to adit anything in the system but they can check the availability and details of the product. Admins and root user have more flexibility and can do all edits and deletes
 
 
 ## Table of Contents
